@@ -28,6 +28,7 @@ public class TestThreadPoolExceptionIgnore extends ThreadPoolExecutor{
         TestThreadPoolExceptionIgnore poolExceptionIgnore = new TestThreadPoolExceptionIgnore(2,2,0L,TimeUnit.SECONDS,new SynchronousQueue<>());
 //        poolExceptionIgnore.submit(wrapper(new Exception("抛异常")));
         poolExceptionIgnore.execute(wrapper(new Exception("抛异常")));
+        poolExceptionIgnore.shutdown();
     }
 
     private static Runnable wrapper(Exception e0){
