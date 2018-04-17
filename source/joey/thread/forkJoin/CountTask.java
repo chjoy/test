@@ -40,6 +40,7 @@ public class CountTask extends RecursiveTask{
                 CountTask subTask = new CountTask(pos,lastOne);
                 pos+=step+1;
                 subtasks.add(subTask);
+                subTask.fork();
             }
             for (CountTask subtask : subtasks) {
                 sum += (long)subtask.join();//书中没有强转
