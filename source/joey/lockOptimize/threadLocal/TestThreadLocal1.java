@@ -1,6 +1,7 @@
 package joey.lockOptimize.threadLocal;
 
 import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * Created by yp-tc-m-7179 on 2018/4/18.
@@ -9,10 +10,16 @@ import java.util.Random;
  * 结论：同时，通过查看源代码，新线程的threadlocal的get()方法都会去调用一次initialValue()，所以每次的random都不同
  */
 public class TestThreadLocal1 {
+    static CountDownLatch countDownLatch = new CountDownLatch(1);
     static ThreadLocal<Random> tl = new ThreadLocal<Random>() {
         @Override
         protected Random initialValue() {
-            return new Random();
+            return new Random(){
+                @Override
+                protected void finalize() throws Throwable {
+                    System.out.println("be gc");
+                }
+            };
         }
     };
 
@@ -26,5 +33,7 @@ public class TestThreadLocal1 {
     public static void main(String[] args) throws Exception {
         new Thread(new r()).start();
         new Thread(new r()).start();
+        System.gc();
+        countDownLatch.await();
     }
 }
