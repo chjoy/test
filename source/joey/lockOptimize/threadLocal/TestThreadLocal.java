@@ -18,7 +18,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class TestThreadLocal {
 
     static int count = 10000000;
-    static int tCount = 4;
+    static int tCount = 40;
     static Random random = new Random();
     static ThreadLocal<Random> tl = new ThreadLocal<Random>() {
         @Override
@@ -41,7 +41,6 @@ public class TestThreadLocal {
 
     public static void main(String[] args) throws Exception {
         ExecutorService executor = Executors.newFixedThreadPool(tCount);
-        long start = System.currentTimeMillis();
         long sum =0;
         for (int i = 0; i < 40; i++) {
             sum +=executor.submit(new r()).get();
