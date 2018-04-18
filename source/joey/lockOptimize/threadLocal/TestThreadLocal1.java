@@ -1,9 +1,6 @@
 package joey.lockOptimize.threadLocal;
 
 import java.util.Random;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Created by yp-tc-m-7179 on 2018/4/18.
