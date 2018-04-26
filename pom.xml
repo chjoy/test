@@ -6,8 +6,6 @@
     <groupId>com.joey.project</groupId>
     <artifactId>test</artifactId>
     <version>1.0-SNAPSHOT</version>
-<!--test-->
-<!-- test1 -->
     <dependencies>
         <dependency>
             <groupId>cn.afterturn</groupId>
