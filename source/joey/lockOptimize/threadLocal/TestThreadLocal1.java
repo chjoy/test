@@ -24,7 +24,6 @@ public class TestThreadLocal1 {
     };
 
     static class r implements Runnable {
-        @Override
         public void run() {
             System.out.println(tl.get());
         }

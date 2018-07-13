@@ -28,7 +28,6 @@ public class TestThreadLocal {
     };
 
     static class r implements Callable<Long> {
-        @Override
         public Long call() {
             long start = System.currentTimeMillis();
             for (int i = 0; i < count; i++) {

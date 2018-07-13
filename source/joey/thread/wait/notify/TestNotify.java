@@ -19,7 +19,7 @@ public class TestNotify {
             return "job:"+i;
         }
     }
-    static List<Job> jobs = new ArrayList<>();
+    static List<Job> jobs = new ArrayList<Job>();
     static int i = 0;
     static class JobMaker extends Thread{
         @Override
