@@ -17,6 +17,7 @@ public class TestFutrueTask {
     private final Thread thread = new Thread(futureTask);
 
     public void start(){thread.start();}
+    public void run(){thread.run();}
 
     public String get(){
         try {
@@ -30,7 +31,8 @@ public class TestFutrueTask {
     }
     public static void main(String[] args) {
         TestFutrueTask testFutrueTask = new TestFutrueTask();
-        testFutrueTask.start();
+        testFutrueTask.run();
+//        testFutrueTask.start();
         System.out.println(testFutrueTask.get());
     }
 }
