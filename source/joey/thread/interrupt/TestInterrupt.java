@@ -19,7 +19,8 @@ public class TestInterrupt {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     System.out.println("sleep interrupted exception!");
-                    Thread.currentThread().interrupt();
+                }finally {
+                    Thread.currentThread().interrupt();//如果此处不再中断一把，循环不会终止，且下面打印出来会是false
                 }
 
                 System.out.println(Thread.currentThread().isInterrupted());
