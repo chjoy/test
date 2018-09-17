@@ -25,6 +25,6 @@ public class TestDeamon {
         Thread t1 = new TestThread("t1");
         t1.setDaemon(true);
         t1.start();
-        Thread.sleep(6000);
+        Thread.sleep(1000);
     }
 }

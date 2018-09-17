@@ -21,7 +21,7 @@ public class TestJoin {
     public static void main(String[] args) throws Exception{
         Thread t1 = new TestThread();
         t1.start();
-        t1.join();//注释看不同效果
+        t1.join();//注释看后面这句打印顺序
         System.out.println("main over!");
     }
 }

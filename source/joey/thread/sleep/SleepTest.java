@@ -9,8 +9,8 @@ import java.util.concurrent.CountDownLatch;
 public class SleepTest {
     public static void main(String[] args) throws Exception{
         int num = 50;
-        CountDownLatch start = new CountDownLatch(1);
-        CountDownLatch end = new CountDownLatch(num);
+        final CountDownLatch start = new CountDownLatch(1);
+        final CountDownLatch end = new CountDownLatch(num);
         for (int i = 0; i < num; i++) {
             new Thread(new Runnable() {
                 @Override
