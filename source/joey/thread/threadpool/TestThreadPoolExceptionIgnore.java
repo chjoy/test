@@ -24,7 +24,7 @@ public class TestThreadPoolExceptionIgnore extends ThreadPoolExecutor{
 
     public static void main(String[] args) {
         TestThreadPoolExceptionIgnore poolExceptionIgnore = new TestThreadPoolExceptionIgnore(2,2,0L,TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>());
-//        poolExceptionIgnore.submit(wrapper(new Exception("抛异常")));
+//        poolExceptionIgnore.submit(wrapper(new Exception("抛异常")));//如果用submit，并且不主动打印异常，异常信息将无法显示
         poolExceptionIgnore.execute(wrapper(new Exception("抛异常")));
         poolExceptionIgnore.shutdown();
     }
@@ -36,7 +36,7 @@ public class TestThreadPoolExceptionIgnore extends ThreadPoolExecutor{
                 try {
                     int i = 1/0;
                 } catch (Exception e) {
-//                    e0.printStackTrace();
+                    e0.printStackTrace();
                     throw e;
                 }
             }
