@@ -32,5 +32,5 @@ create table tmp_1_3 as (
 -- select @de := pow(sum((year_count-@x_avg)*(year_count-@x_avg))*sum((year_count1-@y_avg)*(year_count1-@y_avg)),1/2) from tmp_1_1 group by CRDTORNAME;
 
 create table tmp_1_4_end as (
-  select CRDTORNAME,mo/de from tmp_1_3
+  select CRDTORNAME,mo/de as pearson from tmp_1_3
 )
