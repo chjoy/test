@@ -1,3 +1,6 @@
+
+-- 匹配查询企业之过去12个月/13-24个月各付款人名称付款次数的相关系数
+
 create table tmp_3_1 as (
 
   select B.*,C.year_count as year_count1 from

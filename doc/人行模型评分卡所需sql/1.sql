@@ -1,3 +1,6 @@
+
+-- 匹配查询企业之过去12个月/13-24个月各行业收款次数之相关系数
+
 create table tmp_1_1 as (
 
   select A.CRDTORNAME,B.Debt_industry,case when C.year_count is null then 0 else c.year_count end  as year_count ,case when D.year_count is null then 0 else D.year_count end as year_count1 from
