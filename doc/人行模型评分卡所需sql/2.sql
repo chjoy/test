@@ -1,12 +1,13 @@
 create table tmp_2_1 as (
 
-  select A.*,B.year_count as year_count1 from
+  select B.*,C.year_count as year_count1 from
+    (select distinct Recv_industry from psdas_o_pay_fact )A left join
     (select DEBTORNAME,sum(Number) as year_count,Recv_industry
      from psdas_o_pay_fact
-     where CONSDATE >= '20170701' and CONSDATE < '20180701' group by DEBTORNAME,Recv_industry)A inner join
+     where CONSDATE >= '20170701' and CONSDATE < '20180701' group by DEBTORNAME,Recv_industry)B on A.Recv_industry = B.Recv_industry left join
     (select DEBTORNAME,sum(Number) as year_count,Recv_industry
      from psdas_o_pay_fact
-     where  CONSDATE >= '20180701' and CONSDATE < '20190701' group by DEBTORNAME,Recv_industry)B on A.Recv_industry  = B.Recv_industry and A.DEBTORNAME = B.DEBTORNAME
+     where  CONSDATE >= '20180701' and CONSDATE < '20190701' group by DEBTORNAME,Recv_industry)C on B.Recv_industry  = C.Recv_industry and B.DEBTORNAME = C.DEBTORNAME
 
 );
 
