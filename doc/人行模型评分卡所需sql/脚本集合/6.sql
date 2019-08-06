@@ -1,3 +1,25 @@
+-- 统计行政处罚次数
+DROP TABLE IF EXISTS rh_penalty_count;
+CREATE TABLE rh_penalty_count AS (
+  SELECT
+    ent_name,
+    sum(count) AS penalty_count
+  FROM
+    (SELECT
+       ent_name,
+       count(id) AS count
+     FROM qcc_basic_penalty
+     GROUP BY ent_name
+     UNION ALL
+     SELECT
+       ent_name,
+       count(id) AS count
+     FROM qcc_basic_penalty_credit_china
+     GROUP BY ent_name) AS A
+  GROUP BY ent_name
+);
+
+
 DROP TABLE IF EXISTS rh_score_var_temp01;
 CREATE TABLE rh_score_var_temp01 AS (
   SELECT
@@ -15,7 +37,8 @@ CREATE TABLE rh_score_var_temp01 AS (
     k.num                                    n01,
     l.num                                    n02,
     m.amtRatio,
-    n.rate
+    n.rate,
+    o.penalty_count
   FROM rh_company_scale_temp a
     LEFT JOIN rh_company_industry_info_temp b ON a.DEBTORNAME = b.compname
     LEFT JOIN entinfo c ON a.DEBTORNAME = c.entName
@@ -30,7 +53,9 @@ CREATE TABLE rh_score_var_temp01 AS (
     LEFT JOIN rh_money_change_crdt02_temp l ON a.DEBTORNAME = l.CRDTORNAME
     LEFT JOIN rh_money_scale_temp m ON a.DEBTORNAME = m.DEBTORNAME
     LEFT JOIN rh_cash_flow_temp n ON a.DEBTORNAME = n.CRDTORNAME
+    LEFT JOIN rh_penalty_count o ON a.DEBTORNAME = o.ent_name
 );
+
 
 
 

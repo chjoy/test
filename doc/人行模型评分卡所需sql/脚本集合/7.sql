@@ -3,8 +3,21 @@ DROP TABLE IF EXISTS rh_score_1;
 CREATE TABLE rh_score_1 AS (
   SELECT
     DEBTORNAME,
-    scaleAmtScore ,industrycodeScore,areaNameScore ,emScore ,p01Score , p02Score , h01Score , p03Score , h02SCore ,
-    p04Score , n01Score , n02Score , amtRatioScore , rateScore
+    scaleAmtScore,
+    industrycodeScore,
+    areaNameScore,
+    emScore,
+    p01Score,
+    p02Score,
+    h01Score,
+    p03Score,
+    h02SCore,
+    p04Score,
+    n01Score,
+    n02Score,
+    amtRatioScore,
+    rateScore,
+    penaltyScore
   FROM
     (
       SELECT
@@ -21,7 +34,7 @@ CREATE TABLE rh_score_1 AS (
         WHEN scaleAmt > 0
           THEN 1
         ELSE 0
-        END AS scaleAmtScore,
+        END        AS scaleAmtScore,
         CASE
         WHEN industrycode = '3030'
           THEN 1
@@ -32,7 +45,7 @@ CREATE TABLE rh_score_1 AS (
         WHEN industrycode IN ('2040', '3040', '2030')
           THEN 4
         ELSE 5
-        END AS industrycodeScore,
+        END        AS industrycodeScore,
         CASE
         WHEN areaName IN ('长沙')
           THEN 5
@@ -43,7 +56,7 @@ CREATE TABLE rh_score_1 AS (
         WHEN areaName IN ('怀化', '湘西州', '张家界')
           THEN 2
         ELSE 1
-        END AS areaNameScore,
+        END        AS areaNameScore,
 
         CASE
         WHEN em >= 9
@@ -57,7 +70,7 @@ CREATE TABLE rh_score_1 AS (
         WHEN em >= 0
           THEN 2
         ELSE 0
-        END AS emScore,
+        END        AS emScore,
         CASE
         WHEN abs(p01) > 0.7
           THEN 5
@@ -70,7 +83,7 @@ CREATE TABLE rh_score_1 AS (
         WHEN abs(p01) <= 0.1
           THEN 1
         ELSE 0
-        END AS p01Score,
+        END        AS p01Score,
         CASE
         WHEN abs(p02) > 0.7
           THEN 5
@@ -83,7 +96,7 @@ CREATE TABLE rh_score_1 AS (
         WHEN abs(p02) <= 0.1
           THEN 1
         ELSE 0
-        END AS p02Score,
+        END        AS p02Score,
         CASE WHEN h01 > 0.6
           THEN 5
         WHEN h01 > 0.2
@@ -95,7 +108,7 @@ CREATE TABLE rh_score_1 AS (
         WHEN h01 >= -1
           THEN 1
         ELSE 0
-        END AS h01Score,
+        END        AS h01Score,
 
         CASE
         WHEN abs(p03) > 0.7
@@ -109,7 +122,7 @@ CREATE TABLE rh_score_1 AS (
         WHEN abs(p03) <= 0.1
           THEN 1
         ELSE 0
-        END AS p03Score,
+        END        AS p03Score,
 
         CASE WHEN h02 > 0.6
           THEN 5
@@ -122,7 +135,7 @@ CREATE TABLE rh_score_1 AS (
         WHEN h02 >= -1
           THEN 1
         ELSE 0
-        END AS h02Score,
+        END        AS h02Score,
 
 
         CASE
@@ -137,7 +150,7 @@ CREATE TABLE rh_score_1 AS (
         WHEN abs(p04) <= 0.1
           THEN 1
         ELSE 0
-        END AS p04Score,
+        END        AS p04Score,
 
         CASE WHEN n01 = 0
           THEN 5
@@ -150,7 +163,7 @@ CREATE TABLE rh_score_1 AS (
         WHEN n01 >= 4
           THEN 1
         ELSE 0
-        END AS n01Score,
+        END        AS n01Score,
 
         CASE WHEN n02 = 0
           THEN 5
@@ -163,7 +176,7 @@ CREATE TABLE rh_score_1 AS (
         WHEN n02 >= 4
           THEN 1
         ELSE 0
-        END AS n02Score,
+        END        AS n02Score,
 
         CASE
         WHEN amtRatio >= 1.5
@@ -177,7 +190,7 @@ CREATE TABLE rh_score_1 AS (
         WHEN amtRatio < 0.77
           THEN 1
         ELSE 0
-        END AS amtRatioScore,
+        END        AS amtRatioScore,
 
         CASE
         WHEN rate >= 0.5
@@ -191,8 +204,11 @@ CREATE TABLE rh_score_1 AS (
         WHEN rate < -0.33
           THEN 1
         ELSE 0
-        END AS rateScore
+        END        AS rateScore,
+        CASE
+        WHEN penalty_count > 0
+          THEN -1
+        ELSE 0 END AS penaltyScore
       FROM rh_score_var_temp01
     ) a
-)
--- select * from rh_score_var_temp01
+);

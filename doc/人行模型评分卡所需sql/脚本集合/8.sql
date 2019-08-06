@@ -15,7 +15,8 @@ CREATE TABLE rh_score_end AS (
     n01Score +
     n02Score +
     amtRatioScore +
-    rateScore
+    rateScore +
+    penaltyScore
       AS score0,
     scaleAmtScore * 1.5 +
     industrycodeScore +
@@ -30,7 +31,8 @@ CREATE TABLE rh_score_end AS (
     n01Score * 1.5 +
     n02Score * 1.5 +
     amtRatioScore +
-    rateScore * 1.5
+    rateScore * 1.5 +
+    penaltyScore
       AS score1,
     scaleAmtScore * 1.5 +
     industrycodeScore +
@@ -45,7 +47,8 @@ CREATE TABLE rh_score_end AS (
     n01Score * 1.5 +
     n02Score * 1.5 +
     amtRatioScore * 1.5 +
-    rateScore * 1.5
+    rateScore * 1.5 +
+    penaltyScore
       AS score2,
     scaleAmtScore * 1.5 +
     industrycodeScore +
@@ -60,7 +63,8 @@ CREATE TABLE rh_score_end AS (
     n01Score * 1.5 +
     n02Score * 1.5 +
     amtRatioScore * 1.2 +
-    rateScore * 1.5
+    rateScore * 1.5 +
+    penaltyScore
       AS score3
   FROM rh_score_1
 );
