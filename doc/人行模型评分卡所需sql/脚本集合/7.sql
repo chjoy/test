@@ -3,8 +3,8 @@ DROP TABLE IF EXISTS rh_score_1;
 CREATE TABLE rh_score_1 AS (
   SELECT
     DEBTORNAME,
-    scaleAmtScore + industrycodeScore + areaNameScore + emScore + p01Score + p02Score + h01Score + p03Score + h02SCore +
-    p04Score + n01Score + n02Score + amtRatioScore + rateScore AS score
+    scaleAmtScore ,industrycodeScore,areaNameScore ,emScore ,p01Score , p02Score , h01Score , p03Score , h02SCore ,
+    p04Score , n01Score , n02Score , amtRatioScore , rateScore
   FROM
     (
       SELECT

@@ -13,10 +13,10 @@ create table rh_money_ziwd_crdt_temp_1 as (
 
   select B.*,C.year_count as year_count1 from
     (select distinct CRDTORNAME,DEBTORNAME from psdas_o_pay_fact WHERE DEBTORNAME in (select entName from entinfo))A left join
-    (select CRDTORNAME,sum(Number) as year_count,DEBTORNAME
+    (select CRDTORNAME,sum(AMT) as year_count,DEBTORNAME
      from psdas_o_pay_fact
      where DEBTORNAME in (select entName from entinfo) and CONSDATE >= @fourDate and CONSDATE <= @thirdDate group by CRDTORNAME,DEBTORNAME)B on A.CRDTORNAME = B.CRDTORNAME and A.DEBTORNAME = B.DEBTORNAME left join
-    (select CRDTORNAME,sum(Number) as year_count,DEBTORNAME
+    (select CRDTORNAME,sum(AMT) as year_count,DEBTORNAME
      from psdas_o_pay_fact
      where DEBTORNAME in (select entName from entinfo) and CONSDATE >= @sendDate and CONSDATE <= @firstDate group by CRDTORNAME,DEBTORNAME)C on A.DEBTORNAME  = C.DEBTORNAME and A.CRDTORNAME = C.CRDTORNAME
 
