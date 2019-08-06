@@ -2,6 +2,21 @@ DROP TABLE IF EXISTS rh_score_end;
 CREATE TABLE rh_score_end AS (
   SELECT
     DEBTORNAME,
+    scaleAmtScore +
+    industrycodeScore +
+    areaNameScore +
+    emScore +
+    p01Score +
+    p02Score +
+    h01Score +
+    p03Score +
+    h02SCore +
+    p04Score +
+    n01Score +
+    n02Score +
+    amtRatioScore +
+    rateScore
+      AS score0,
     scaleAmtScore * 1.5 +
     industrycodeScore +
     areaNameScore +
@@ -17,7 +32,6 @@ CREATE TABLE rh_score_end AS (
     amtRatioScore +
     rateScore * 1.5
       AS score1,
-    DEBTORNAME,
     scaleAmtScore * 1.5 +
     industrycodeScore +
     areaNameScore +
@@ -33,7 +47,6 @@ CREATE TABLE rh_score_end AS (
     amtRatioScore * 1.5 +
     rateScore * 1.5
       AS score2,
-    DEBTORNAME,
     scaleAmtScore * 1.5 +
     industrycodeScore +
     areaNameScore +
