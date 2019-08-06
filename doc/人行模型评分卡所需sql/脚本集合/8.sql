@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS rh_score_2;
-CREATE TABLE rh_score_2 AS (
+DROP TABLE IF EXISTS rh_score_end;
+CREATE TABLE rh_score_end AS (
   SELECT
     DEBTORNAME,
     scaleAmtScore * 1.5 +
@@ -16,13 +16,7 @@ CREATE TABLE rh_score_2 AS (
     n02Score * 1.5 +
     amtRatioScore +
     rateScore * 1.5
-      AS score
-  FROM rh_score_1
-);
-
-DROP TABLE IF EXISTS rh_score_3;
-CREATE TABLE rh_score_3 AS (
-  SELECT
+      AS score1,
     DEBTORNAME,
     scaleAmtScore * 1.5 +
     industrycodeScore +
@@ -38,13 +32,7 @@ CREATE TABLE rh_score_3 AS (
     n02Score * 1.5 +
     amtRatioScore * 1.5 +
     rateScore * 1.5
-      AS score
-  FROM rh_score_1
-);
-
-DROP TABLE IF EXISTS rh_score_4;
-CREATE TABLE rh_score_4 AS (
-  SELECT
+      AS score2,
     DEBTORNAME,
     scaleAmtScore * 1.5 +
     industrycodeScore +
@@ -60,6 +48,6 @@ CREATE TABLE rh_score_4 AS (
     n02Score * 1.5 +
     amtRatioScore * 1.2 +
     rateScore * 1.5
-      AS score
+      AS score3
   FROM rh_score_1
 );
