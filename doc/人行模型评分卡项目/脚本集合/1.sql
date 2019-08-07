@@ -434,7 +434,7 @@ CREATE TABLE rh_cash_flow_temp AS (
   SELECT
     a.CRDTORNAME,
     if(
-        b .12DebtTotalAmt=0, -9999, (a.12CreTotalAmt-b.12DebtTotalAmt) / b.12DebtTotalAmt) rate FROM rh_12MonthCrdtData a LEFT JOIN rh_12MonthDebtData b ON a.CRDTORNAME = b.DEBTORNAME
+        b.12DebtTotalAmt=0, -9999, (a.12CreTotalAmt-b.12DebtTotalAmt) / b.12DebtTotalAmt) rate FROM rh_12MonthCrdtData a LEFT JOIN rh_12MonthDebtData b ON a.CRDTORNAME = b.DEBTORNAME
 );
 ALTER TABLE rh_cash_flow_temp
   ADD INDEX index_CRDTORNAME (CRDTORNAME);

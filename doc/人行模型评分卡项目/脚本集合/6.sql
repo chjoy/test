@@ -2,7 +2,7 @@
 DROP TABLE IF EXISTS rh_score_var_temp01;
 CREATE TABLE rh_score_var_temp01 AS (
   SELECT
-    a.DEBTORNAME,
+    c.entName as DEBTORNAME,
     cast(a.scaleAmt / 10000.00 AS SIGNED) AS scaleAmt,
     b.industrycode,
     c.areaName,
