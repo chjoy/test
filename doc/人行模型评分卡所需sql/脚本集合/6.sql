@@ -1,24 +1,3 @@
--- 统计行政处罚次数
-DROP TABLE IF EXISTS rh_penalty_count;
-CREATE TABLE rh_penalty_count AS (
-  SELECT
-    ent_name,
-    sum(count) AS penalty_count
-  FROM
-    (SELECT
-       ent_name,
-       count(id) AS count
-     FROM qcc_basic_penalty
-     GROUP BY ent_name
-     UNION ALL
-     SELECT
-       ent_name,
-       count(id) AS count
-     FROM qcc_basic_penalty_credit_china
-     GROUP BY ent_name) AS A
-  GROUP BY ent_name
-);
-
 
 DROP TABLE IF EXISTS rh_score_var_temp01;
 CREATE TABLE rh_score_var_temp01 AS (
@@ -39,21 +18,20 @@ CREATE TABLE rh_score_var_temp01 AS (
     m.amtRatio,
     n.rate,
     o.penalty_count
-  FROM rh_company_scale_temp a
-    LEFT JOIN rh_company_industry_info_temp b ON a.DEBTORNAME = b.compname
-    LEFT JOIN entinfo c ON a.DEBTORNAME = c.entName
-    LEFT JOIN rh_company_age_temp d ON a.DEBTORNAME = d.DEBTORNAME
-    LEFT JOIN rh_crdt_relation_tmp_end e ON a.DEBTORNAME = e.CRDTORNAME
-    LEFT JOIN rh_debt_relation_tmp_end f ON a.DEBTORNAME = f.DEBTORNAME
-    LEFT JOIN rh_money_zjtx_debt_temp g ON a.DEBTORNAME = g.DEBTORNAME
-    LEFT JOIN rh_money_zjwd_debt_temp_end h ON a.DEBTORNAME = h.CRDTORNAME
-    LEFT JOIN rh_money_zjtx_crdt_temp i ON a.DEBTORNAME = i.CRDTORNAME
-    LEFT JOIN rh_money_ziwd_crdt_temp_end j ON a.DEBTORNAME = j.DEBTORNAME
-    LEFT JOIN rh_money_change_debt01_temp k ON a.DEBTORNAME = k.DEBTORNAME
-    LEFT JOIN rh_money_change_crdt02_temp l ON a.DEBTORNAME = l.CRDTORNAME
-    LEFT JOIN rh_money_scale_temp m ON a.DEBTORNAME = m.DEBTORNAME
-    LEFT JOIN rh_cash_flow_temp n ON a.DEBTORNAME = n.CRDTORNAME
-    LEFT JOIN rh_penalty_count o ON a.DEBTORNAME = o.ent_name
+  FROM entinfo c LEFT JOIN rh_company_scale_temp a ON a.DEBTORNAME = c.entName
+    LEFT JOIN rh_company_industry_info_temp b ON c.entName = b.compname
+    LEFT JOIN rh_company_age_temp d ON c.entName = d.DEBTORNAME
+    LEFT JOIN rh_crdt_relation_tmp_end e ON c.entName = e.CRDTORNAME
+    LEFT JOIN rh_debt_relation_tmp_end f ON c.entName = f.DEBTORNAME
+    LEFT JOIN rh_money_zjtx_debt_temp g ON c.entName = g.DEBTORNAME
+    LEFT JOIN rh_money_zjwd_debt_temp_end h ON c.entName = h.CRDTORNAME
+    LEFT JOIN rh_money_zjtx_crdt_temp i ON c.entName = i.CRDTORNAME
+    LEFT JOIN rh_money_ziwd_crdt_temp_end j ON c.entName = j.DEBTORNAME
+    LEFT JOIN rh_money_change_debt01_temp k ON c.entName = k.DEBTORNAME
+    LEFT JOIN rh_money_change_crdt02_temp l ON c.entName = l.CRDTORNAME
+    LEFT JOIN rh_money_scale_temp m ON c.entName = m.DEBTORNAME
+    LEFT JOIN rh_cash_flow_temp n ON c.entName = n.CRDTORNAME
+    LEFT JOIN rh_penalty_count o ON c.entName = o.ent_name
 );
 
 
