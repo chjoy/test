@@ -449,13 +449,13 @@ CREATE TABLE rh_penalty_count AS (
     (SELECT
        ent_name,
        count(id) AS count
-     FROM qcc_basic_penalty
+     FROM qcc_basic_penalty where data_state=1
      GROUP BY ent_name
      UNION ALL
      SELECT
        ent_name,
        count(id) AS count
-     FROM qcc_basic_penalty_credit_china
+     FROM qcc_basic_penalty_credit_china where data_state=1
      GROUP BY ent_name) AS A
   GROUP BY ent_name
 );
