@@ -34,5 +34,13 @@
             <artifactId>easypoi-annotation</artifactId>
             <version>3.0.3</version>
         </dependency>
+        <!--消息中间件依赖start-->
+        <!--rabbit-->
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>5.6.0</version>
+        </dependency>
+        <!--消息中间件依赖end-->
     </dependencies>
 </project>
